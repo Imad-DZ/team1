@@ -1,0 +1,327 @@
+:root {
+  --dark-blue: #1a237e; /* Deep navy background */
+  --card-bg: #ffffff;
+  --text-light: #f8f8f8;
+  --text-dark: #333333;
+  --green-correct: #4caf50;
+  --red-wrong: #f44336;
+  --blue-total: #2196f3;
+  --yellow-badge: #ffc107;
+  --primary-button-blue: #42a5f5;
+  --secondary-button-white: #e0e0e0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 50;
+  padding: 50;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  max-height: 100vh;
+  background-color: #1a237e;
+
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex; /* Use flex for the whole body to handle sticky footer/background */
+  flex-direction: column;
+}
+
+header {
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 20px 10%;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+/* --- Navigation Bar Styling --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: transparent;
+  /* Slightly transparent for depth */
+  color: var(--text-light);
+  font-weight: bold;
+}
+
+.logo {
+  /* Style for your logo placeholder */
+  width: 40px;
+  height: 40px;
+  background-image: url("sub.jpg");
+  background-size: cover;
+  background-color: #fefeff;
+  border-radius: 50%;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+}
+
+.navbar li {
+  margin-left: 20px;
+}
+
+.navbar a {
+  font-size: 18px;
+  color: #fff; /* White color */
+  text-decoration: none; /* Removes the default underline from links */
+  font-weight: 500;
+  margin-left: 35px; /* Adds space between the links */
+  transition: 0.3s; /* Smooth transition for hover effects */
+}
+
+.navbar a:hover {
+  color: #000000;
+}
+
+.navbar li.active a {
+  color: var(--yellow-badge); /* Highlight the active 'Results' link */
+  border-bottom: 2px solid var(--yellow-badge);
+}
+
+/* --- Main Content Layout --- */
+.container {
+  /* 1. Essential Flexbox properties */
+  display: flex; /* Enables the Flexbox layout */
+  flex-grow: 1; /* Allows the main area to fill the available height */
+  flex-direction: column; /* Stacks children vertically (optional but often helpful) */
+
+  /* 2. Centering properties */
+  justify-content: center; /* Centers the content (the white box) VERTICALLY */
+  align-items: center;
+  width: 300;
+  /* Centers the content (the white box) HORIZONTALLY */
+  display: flexbox;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Ensure the container takes up the full space needed */
+  min-height: 100vh; /* Ensures the container is at least the full viewport height */
+  padding: 40px 20px; /* Add some padding so the box isn't stuck to the edges */
+
+  /* ... other background styles ... */
+  background: radial-gradient(
+    circle at 10% 20%,
+    #3f51b5 0%,
+    var(--dark-blue) 90%
+  );
+}
+
+/* --- Results Card Styling --- */
+.results-card {
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px; /* Max width for a clean card */
+  text-align: center;
+  padding: 30px;
+  display: flexbox;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trophy-icon span {
+  font-size: 7em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.results-card h1 {
+  font-size: 2em;
+  margin-bottom: 5px;
+  color: var(--dark-blue);
+}
+
+.results-card p {
+  font-size: 1.1em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* --- Score Circle Styling (SVG) --- */
+.score-circle-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 20px auto 40px auto;
+}
+
+.score-circle {
+  transform: rotate(-90deg); /* Start the circle from the top */
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #e0e0e0;
+  stroke-width: 3.8;
+}
+
+.circle-progress {
+  fill: none;
+  stroke: var(--primary-button-blue);
+  stroke-width: 3.8;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s linear;
+}
+
+.score-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.score-percentage {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: var(--dark-blue);
+}
+
+.score-label {
+  font-size: 0.9em;
+  color: #999;
+}
+
+/* --- Separator --- */
+.separator {
+  border: 0;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 20px 0;
+}
+
+/* --- Detailed Results & Badge Section --- */
+.answer-summary {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  /* Added subtle top border for separation */
+  border-top: 1px solid #eee;
+  padding-top: 30px;
+}
+
+.summary-item {
+  text-align: center;
+  padding: 0 10px;
+}
+
+.summary-item .count {
+  display: block;
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.summary-item .label {
+  font-size: 0.9em;
+  color: #666;
+  white-space: nowrap;
+}
+
+.summary-item.correct .count {
+  color: var(--green-correct);
+}
+.summary-item.wrong .count {
+  color: var(--red-wrong);
+}
+.summary-item.total .count {
+  color: var(--blue-total);
+}
+
+.badge-message {
+  background-color: #fffde7; /* Light yellow background */
+  border: 1px solid var(--yellow-badge);
+  color: #333;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.medal-icon {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+/* --- Action Buttons --- */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background-color: var(--primary-button-blue);
+  color: white;
+  box-shadow: 0 4px 10px rgba(66, 165, 245, 0.4);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-button-white);
+  color: var(--dark-blue);
+  border: 1px solid #ccc;
+}
+
+.btn-primary:hover {
+  background-color: #1e88e5;
+}
+
+.btn-secondary:hover {
+  background-color: #f0f0f0;
+}
+
+/* --- Share Score Section --- */
+.share-score {
+  text-align: center;
+  color: var(--text-light);
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.share-score p {
+  margin-bottom: 15px;
+}
+
+.share-icons a {
+  text-decoration: none;
+  font-size: 1.5em;
+  color: var(--text-light);
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 50%;
+  margin: 0 8px;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.share-icons a:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}

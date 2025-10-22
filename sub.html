@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZ WEBPAGE Html Css Javascript|CSCC</title>
+    <link rel="stylesheet" href="sub.css" />
+  </head>
+  <body>
+    <main class="main">
+      <header class="header">
+        <a href="#" class="logo">CSCC DEV QUIZ</a>
+
+        <nav class="navbar">
+          <a href="#">home</a>
+          <a href="#">Result</a>
+          <a href="#">leaderboard</a>
+          <a href="#">quiz</a>
+        </nav>
+      </header>
+      <section class="results-card">
+        <div class="score-display-section">
+          <div class="trophy-icon">
+            <span>&#127942;</span>
+          </div>
+          <h1>Congratulations!</h1>
+          <p>You've completed the challenge</p>
+
+          <div class="score-circle-container">
+            <svg class="score-circle" viewBox="0 0 36 36">
+              <path
+                class="circle-bg"
+                d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+              <path
+                class="circle-progress"
+                stroke-dasharray="85.100"
+                ;
+                d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+            </svg>
+            <div class="score-text">
+              <span class="score-percentage">15%</span>
+              <span class="score-label">Score</span>
+            </div>
+          </div>
+        </div>
+
+        <hr class="separator" />
+
+        <div class="detailed-results-section">
+          <div class="answer-summary">
+            <div class="summary-item correct">
+              <span class="count">8</span>
+              <span class="label">Correct Answers</span>
+            </div>
+            <div class="summary-item wrong">
+              <span class="count">2</span>
+              <span class="label">Wrong Answers</span>
+            </div>
+            <div class="summary-item total">
+              <span class="count">10</span>
+              <span class="label">Total Questions</span>
+            </div>
+          </div>
+
+          <div class="badge-message">
+            <span class="medal-icon">&#129351;</span>
+            <p>You earned the "**Distinguished Developer**" badge</p>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn btn-primary">Play Again</button>
+            <button class="btn btn-secondary">View Answers</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="share-score">
+        <p>Share Your Score</p>
+        <div class="share-icons">
+          <a href="#" class="share-icon">&#128187;</a>
+          <a href="#" class="share-icon">&#128279;</a>
+          <a href="#" class="share-icon">&#128221;</a>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
