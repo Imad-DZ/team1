@@ -1,0 +1,245 @@
+   * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0E0D51;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        
+        body::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 50%;
+            bottom: -80px;
+            right: -80px;
+        }
+
+        .container1 {
+            margin: 5px;
+            padding: 10px;
+            display: flex;
+            text-align: center;
+            width: max-content;
+            position: fixed;
+            top: 0;
+            right: 0;
+            gap: 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .container1 div {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .container1 div:hover {
+            transform: translateY(-3px);
+        }
+
+        h1 {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: 2px solid rgba(255, 255, 255, 0.315);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            background-color: rgba(240, 255, 255, 0.158);
+        }
+
+        .container1 div:hover h1 {
+            border-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+.container1 a{text-decoration: none;  color: #667eea;}
+        img {
+    
+            width: 120px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        .container2 {
+            width: 90%;
+            max-width: 800px;
+            padding: 10px;
+            margin: auto;
+            text-align: center;
+            margin-top: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container2 h2 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .container2 p {
+            font-size: 2em;
+            color: #cbd5e1;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .container2 a {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .container2 a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .timer-challenge {
+            display: block;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 50px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(102, 126, 234, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .timer-challenge span {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #fbbf24;
+            animation: glow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(251, 191, 36, 0.8), 0 0 30px rgba(251, 191, 36, 0.5);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container1 {
+                flex-direction: column;
+                width: auto;
+                gap: 5px;
+                padding: 8px;
+            }
+
+            h1 {
+                font-size: 1em;
+                padding: 8px;
+            }
+
+            .container2 {
+                margin-top: 180px;
+                width: 95%;
+                padding: 15px;
+            }
+
+            .container2 h2 {
+                font-size: 1.8em;
+            }
+
+            .container2 p {
+                font-size: 1em;
+            }
+
+            img {
+                width: 150px;
+            }
+
+            .container2 a {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+
+            .timer-challenge {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+
+            .timer-challenge span {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container1 {
+                margin: 5px;
+                padding: 5px;
+            }
+
+            h1 {
+                font-size: 0.9em;
+                padding: 6px;
+            }
+
+            .container2 h2 {
+                font-size: 1.5em;
+            }
+
+            .container2 p {
+                font-size: 0.95em;
+                margin-bottom: 30px;
+            }
+
+            img {
+                width: 120px;
+                margin-bottom: 20px;
+            }
+
+            .timer-challenge {
+                padding: 10px 15px;
+                font-size: 0.85em;
+            }
+
+            .timer-challenge span {
+                font-size: 1em;
+            }
+        }
