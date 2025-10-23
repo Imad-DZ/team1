@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Web Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0E0D51 0%, #1a1970 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            background: rgba(30, 58, 138, 0.3);
+        }
+
+        body::before {
+            width: 350px;
+            height: 350px;
+            top: -100px;
+            left: -100px;
+        }
+
+        body::after {
+            width: 280px;
+            height: 280px;
+            bottom: -80px;
+            right: -80px;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            background: rgba(30, 58, 138, 0.25);
+        }
+
+        .bg-circle-1 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: -60px;
+        }
+
+        .bg-circle-2 {
+            width: 180px;
+            height: 180px;
+            bottom: 20%;
+            right: -50px;
+        }
+
+        .bg-circle-3 {
+            width: 150px;
+            height: 150px;
+            top: 15%;
+            right: 80px;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timer-circle {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            position: relative;
+        }
+
+        .timer-svg {
+            transform: rotate(-90deg);
+        }
+
+        .timer-circle circle {
+            fill: none;
+            stroke-width: 6;
+        }
+
+        .timer-bg {
+            stroke: rgba(255, 255, 255, 0.1);
+        }
+
+        .timer-progress {
+            stroke: #3B82F6;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .timer-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .progress-info {
+            text-align: center;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        .question-number {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3B82F6;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .category {
+            display: inline-block;
+            background: #E0F2FE;
+            color: #0284C7;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .question-text {
+            font-size: 19px;
+            font-weight: 600;
+            color: #1E293B;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option:hover {
+            border-color: #3B82F6;
+            background: #F0F9FF;
+        }
+
+        .option.selected {
+            border-color: #3B82F6;
+            background: #EFF6FF;
+        }
+
+        .option.correct {
+            border-color: #10B981;
+            background: #D1FAE5;
+        }
+
+        .option.wrong {
+            border-color: #EF4444;
+            background: #FEE2E2;
+        }
+
+        .option-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #F1F5F9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #64748B;
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+
+        .option.selected .option-letter {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .option.correct .option-letter {
+            background: #10B981;
+            color: white;
+        }
+
+        .option.wrong .option-letter {
+            background: #EF4444;
+            color: white;
+        }
+
+        .option-text {
+            font-size: 15px;
+            color: #334155;
+            line-height: 1.3;
+        }
+
+        .results {
+            text-align: center;
+            color: white;
+        }
+
+        .results h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 72px;
+            font-weight: bold;
+            margin: 30px 0;
+        }
+
+        .restart-btn {
+            background: #3B82F6;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.2s ease;
+        }
+
+        .restart-btn:hover {
+            background: #2563EB;
+        }
+
+        @media (max-width: 640px) {
+            .question-card {
+                padding: 18px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .option-text {
+                font-size: 13px;
+            }
+            
+            .option {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-circle bg-circle-1"></div>
+    <div class="bg-circle bg-circle-2"></div>
+    <div class="bg-circle bg-circle-3"></div>
+    
+    <div class="container">
+        <div id="quiz">
+            <div class="timer-circle">
+                <svg class="timer-svg" width="80" height="80">
+                    <circle class="timer-bg" cx="40" cy="40" r="36"></circle>
+                    <circle class="timer-progress" cx="40" cy="40" r="36" id="timerCircle"></circle>
+                </svg>
+                <div class="timer-text" id="timer">30</div>
+            </div>
+
+            <div class="progress-info">
+                <div class="question-number">Question <span id="currentQ">1</span> of 10</div>
+                <div style="font-size: 12px; margin-top: 3px;"><span id="percentage">10</span>%</div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 10%;"></div>
+            </div>
+
+            <div class="question-card">
+                <div class="category" id="category">Programming</div>
+                <div class="question-text" id="questionText"></div>
+                <div class="options" id="options"></div>
+            </div>
+        </div>
+
+        <div id="results" style="display: none;">
+            <div class="results">
+                <h1>Quiz Complete!</h1>
+                <div class="score"><span id="finalScore">0</span>/10</div>
+                <p style="font-size: 20px; margin-bottom: 10px;">Correct Answers: <span id="correctCount">0</span></p>
+                <p style="font-size: 18px; opacity: 0.8;">Keep learning and improving!</p>
+                <button class="restart-btn" onclick="location.reload()">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                category: "HTML Basics",
+                question: "What does HTML stand for?",
+                options: ["Hyper Text Markup Language", "High Tech Modern Language", "Home Tool Markup Language", "Hyperlinks Text Mark Language"],
+                correct: 0
+            },
+            {
+                category: "CSS Basics",
+                question: "Which property is used to change the background color?",
+                options: ["bgcolor", "color", "background-color", "bg-color"],
+                correct: 2
+            },
+            {
+                category: "HTML Basics",
+                question: "Which tag is used to create a link?",
+                options: ["link", "a", "href", "url"],
+                correct: 1
+            },
+            {
+                category: "JavaScript Basics",
+                question: "How do you display a message in JavaScript?",
+                options: ["alert()", "msg()", "display()", "show()"],
+                correct: 0
+            },
+            {
+                category: "HTML Basics",
+                question: "Which tag is used to insert an image?",
+                options: ["image", "img", "pic", "photo"],
+                correct: 1
+            },
+            {
+                category: "CSS Basics",
+                question: "Which property is used to change text color?",
+                options: ["text-color", "font-color", "color", "text-style"],
+                correct: 2
+            },
+            {
+                category: "HTML Basics",
+                question: "Which tag is used to create a paragraph?",
+                options: ["paragraph", "p", "para", "pg"],
+                correct: 1
+            },
+            {
+                category: "JavaScript Basics",
+                question: "Which symbol is used for single line comments?",
+                options: ["#", "//", "/*", "<!--"],
+                correct: 1
+            },
+            {
+                category: "CSS Basics",
+                question: "Which property is used to make text bold?",
+                options: ["text-weight", "font-weight", "bold", "text-bold"],
+                correct: 1
+            },
+            {
+                category: "HTML Basics",
+                question: "Which tag creates a numbered list?",
+                options: ["ul", "ol", "list", "nl"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let timeLeft = 30;
+        let timerInterval;
+        let answered = false;
+
+        const circumference = 2 * Math.PI * 36;
+
+        function startTimer() {
+            const timerCircle = document.getElementById('timerCircle');
+            timerCircle.style.strokeDasharray = circumference;
+            timerCircle.style.strokeDashoffset = 0;
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = timeLeft;
+                
+                const offset = circumference - (timeLeft / 30) * circumference;
+                timerCircle.style.strokeDashoffset = offset;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    if (!answered) {
+                        nextQuestion();
+                    }
+                }
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            answered = false;
+            timeLeft = 30;
+            clearInterval(timerInterval);
+            
+            const q = questions[currentQuestion];
+            document.getElementById('category').textContent = q.category;
+            document.getElementById('questionText').textContent = q.question;
+            document.getElementById('currentQ').textContent = currentQuestion + 1;
+            document.getElementById('percentage').textContent = ((currentQuestion + 1) * 10);
+            document.getElementById('progressFill').style.width = ((currentQuestion + 1) * 10) + '%';
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                optionDiv.onclick = () => selectOption(index);
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            startTimer();
+        }
+
+        function selectOption(selected) {
+            if (answered) return;
+            
+            answered = true;
+            clearInterval(timerInterval);
+
+            const options = document.querySelectorAll('.option');
+            const correct = questions[currentQuestion].correct;
+
+            if (selected === correct) {
+                score++;
+                options[selected].classList.add('correct');
+            } else {
+                options[selected].classList.add('wrong');
+                options[correct].classList.add('correct');
+            }
+
+            setTimeout(nextQuestion, 1500);
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('correctCount').textContent = score;
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
