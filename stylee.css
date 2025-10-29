@@ -1,9 +1,9 @@
 :root{
-  --bg:#0f1724;
-  --card:#0b1220;
+  --bg:#0a0e3f;
+  --card:#0a0e3f;
   --muted:#9aa4b2;
   --accent:linear-gradient(90deg,#7c3aed,#06b6d4);
-  --glass: rgba(255,255,255,0.03);
+  --glass:#0a0e3f;
   --radius:14px;
 }
 *{box-sizing:border-box}
@@ -22,13 +22,15 @@ body{
 .container{max-width:900px;margin:0 auto}
 header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
 .title{display:flex;gap:12px;align-items:center}
+
 .logo{width:56px;height:56px;border-radius:12px;background:var(--glass);display:grid;place-items:center;box-shadow:0 6px 18px rgba(2,6,23,0.6);font-weight:700;font-size:20px;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+
 h1{margin:0;font-size:18px}
 p.lead{margin:0;color:var(--muted);font-size:13px}
-.card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);border-radius:var(--radius);padding:18px;box-shadow: 0 10px 30px rgba(2,6,23,0.6)}
+.card{background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(6,182,212,0.01));border:1px solid rgba(255,255,255,0.04);border-radius:var(--radius);padding:18px;box-shadow: 0 10px 30px rgba(2,6,23,0.6)}
 .input-section{margin-bottom:20px;display:flex;gap:10px;align-items:center}
 .input-section input{padding:8px 12px;border-radius:8px;border:none;outline:none;font-size:14px;width:220px}
-.input-section button{padding:8px 16px;border:none;border-radius:8px;background:linear-gradient(90deg,#7c3aed,#06b6d4);color:white;cursor:pointer}
+.input-section button{padding:8px 16px;border:none;border-radius:8px;background:#2f49ff;color:white;cursor:pointer}
 table{width:100%;border-collapse:collapse;margin-top:14px}
 thead tr{color:var(--muted);font-size:13px;text-align:left}
 tbody tr{transition:transform .18s ease, background .18s ease}
